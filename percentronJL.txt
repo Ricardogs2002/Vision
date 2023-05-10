@@ -1,0 +1,40 @@
+import numpy as np
+W=np.array([1,1,1])
+#Inicializamos los pesos del perceptrón, es decir, los valores que
+# se utilizan para hacer la suma ponderada de las entradas del perceptrón.
+# En este caso, tenemos un vector de pesos W de longitud 3, que se inicializa 
+#con valores [1,1,1].
+X=np.array([[1,-1,-1],[1,-1,1],[1,1,-1],[1,1,1]])
+#Establecemos la matriz de entradas X, donde cada fila es un vector de entrada para el perceptrón. 
+#La primera columna de la matriz es siempre 1 para representar el término de sesgo.
+
+Y=np.array([-1,-1,-1,1])
+#Establecemos la matriz de objetivos Y, que contiene las salidas 
+#esperadas para cada entrada correspondiente en la matriz X. 
+#Para la compuerta lógica AND, las entradas son [-1,-1], [-1,1], [1,-1], y [1,1], y 
+#las salidas correspondientes son todas -1, excepto para la entrada [1,1] que tiene 
+#una salida de 1.
+epoca=0
+#Inicializamos una variable de época que se utilizará
+# para contar el número de iteraciones completadas por el perceptrón.
+
+
+cont=len(X)
+#Establecemos la variable cont para el número de filas en la matriz de entrada X.
+
+for i in range(cont):
+    Yg=np.sign(np.dot(np.transpose(W),X[i]))
+    W=W+0.5*(-Yg+Y[i])*X[i]
+    print(W)
+#Iteramos a través de todas las filas de la matriz de entrada X.
+#Para cada fila, calculamos la salida del perceptrón utilizando los pesos actuales W y 
+#la entrada correspondiente X[i], y actualizamos los pesos utilizando la regla de 
+#aprendizaje del perceptrón. El resultado se imprime en cada iteración.
+
+print("Resultados:")
+for i in range(cont):
+    print(np.sign(np.dot(np.transpose(W),X[i])))
+#Imprimimos los resultados finales del perceptrón para cada entrada en la matriz X, 
+#utilizando los pesos finales obtenidos en el ciclo anterior. Cada salida se obtiene 
+#al calcular la suma ponderada de las entradas con los pesos finales y luego aplicando 
+#la función de activación signo para producir una salida binaria.
